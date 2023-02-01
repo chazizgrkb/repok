@@ -6,3 +6,5 @@ $mysql_auth = [
     "username" => "root",
     "password" => "",
 ];
+
+$debugMode = true;

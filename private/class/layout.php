@@ -2,43 +2,39 @@
 
 namespace RePok {
 
+    use Twig\Environment;
+    use Twig\Loader\FilesystemLoader;
+
     /**
      * Twig loader, initializes Twig with standard configurations and extensions.
      *
      * @param string $subfolder Subdirectory to use in the templates/ directory.
-     * @return \Twig\Environment Twig object.
+     * @return Environment Twig object.
      */
     function twigloader($subfolder = '', $customloader = null, $customenv = null)
     {
-        global $tplCache, $tplNoCache, $userdata, $notificationCount, $log, $lpp, $footerlinks, $domain, $uri;
+        global $userdata, $messages, $log, $lpp, $footerlinks, $domain, $uri, $debugMode, $page;
 
-        $doCache = ($tplNoCache ? false : $tplCache);
+        chdir('../');
+        $loader = new FilesystemLoader('private/templates/' . $subfolder);
 
-        if (!isset($customloader)) {
-            $loader = new \Twig\Loader\FilesystemLoader('templates/' . $subfolder);
-        } else {
-            $loader = $customloader();
-        }
+        $twig = new Environment($loader, [
+            'cache' => false,
+            'debug' => $debugMode,
+        ]);
 
-        if (!isset($customenv)) {
-            $twig = new \Twig\Environment($loader, [
-                'cache' => $doCache,
-            ]);
-        } else {
-            $twig = $customenv($loader, $doCache);
-        }
-
-        // Add principia-web specific extension
+        // Add repok specific extension
         $twig->addExtension(new RepokExtension());
 
         $twig->addGlobal('userdata', $userdata);
-        $twig->addGlobal('notification_count', $notificationCount);
+        $twig->addGlobal('message_count', $messages);
         $twig->addGlobal('log', $log);
         $twig->addGlobal('glob_lpp', $lpp);
         $twig->addGlobal('footerlinks', $footerlinks);
         $twig->addGlobal('domain', $domain);
         $twig->addGlobal('uri', $uri);
         $twig->addGlobal('pagename', substr($_SERVER['PHP_SELF'], 0, -4));
+        $twig->addGlobal('page', $page);
 
         return $twig;
     }
@@ -52,12 +48,7 @@ namespace RePok {
 
     function pagination($levels, $lpp, $url, $current)
     {
-        global $acmlm;
-
-        if ($acmlm)
-            $twig = _twigloader('../../templates/components');
-        else
-            $twig = twigloader('components');
+        $twig = twigloader('components');
 
         return $twig->render('pagination.twig', [
             'levels' => $levels, 'lpp' => $lpp, 'url' => $url, 'current' => $current
@@ -66,12 +57,7 @@ namespace RePok {
 
     function error($title, $message)
     {
-        global $acmlm, $wiki;
-
-        if ($acmlm || $wiki)
-            $twig = _twigloader();
-        else
-            $twig = twigloader();
+        $twig = twigloader();
 
         echo $twig->render('_error.twig', ['err_title' => $title, 'err_message' => $message]);
         die();
@@ -97,8 +83,7 @@ namespace RePok {
             return twigloader('components')->render('level.twig', ['level' => $level, 'featured' => $featured, 'img' => $img, 'page' => $page]);
         });
     }
-
-    function relativeTime($time)
+    function relativeTime($time, $truncate)
     {
         if (!$time) return 'never';
 
@@ -106,7 +91,7 @@ namespace RePok {
             'language' => '\RelativeTime\Languages\English',
             'separator' => ', ',
             'suffix' => true,
-            'truncate' => 1,
+            'truncate' => $truncate,
         ]);
 
         return $relativeTime->timeAgo($time);

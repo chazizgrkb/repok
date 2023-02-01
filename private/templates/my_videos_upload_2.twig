@@ -1,0 +1,90 @@
+{% extends "_layout.twig" %}
+
+{% block title %}Upload{% endblock %}
+
+	{% block content %}
+        {% if error %}
+            <div class="header_message">{{ error }}</div>
+        {% endif %}
+		{% if videoid %}
+			<div class="tableSubTitle">Thank you!</div>
+			Your video has been sucessfully uploaded! It will be soon processed!
+            <div style="padding: 15px 0px 10px 0px;">
+				<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#E5ECF9">
+					<tbody>
+						<tr>
+                            <td><img src="img/box_login_tl.gif" width="5" height="5"></td>
+                            <td width="100%"><img src="img/pixel.gif" width="1" height="5"></td>
+                            <td><img src="img/box_login_tr.gif" width="5" height="5"></td>
+                        </tr>
+                        <tr>
+                            <form name="linkForm" id="linkForm"></form>
+                            <td><img src="img/pixel.gif" width="5" height="1"></td>
+                            <td align="center">
+                                <div style="font-size: 11px; font-weight: bold; color: #CC6600; padding: 5px 0px 5px 0px;">
+                                    Share this video! Copy and paste this link:
+                                </div>
+                                <div style="font-size: 11px; padding-bottom: 15px;">
+                                    <input name="video_link" type="text"
+                                           onclick="javascript:document.linkForm.video_link.focus();document.linkForm.video_link.select();"
+                                           value="{{ domain }}/watch.php?v={{ videoid }}" size="50" readonly="true"
+                                           style="font-size: 10px; text-align: center;">
+                                </div>
+                            </td>
+                            <td><img src="img/pixel.gif" width="5" height="1"></td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/box_login_bl.gif" width="5" height="5"></td>
+                            <td><img src="img/pixel.gif" width="1" height="5"></td>
+                            <td><img src="img/box_login_br.gif" width="5" height="5"></td>
+                        </tr>
+					</tbody>
+				</table>
+            </div>
+		{% else %}
+        <div id="uploadVid">
+            <h2 style="color:green">Video Upload (Step 2 of 2)</h2>
+
+            <form name="uploadForm" id="uploadForm" method="post" action="/my_videos_upload_2.php"
+                  enctype="multipart/form-data">
+                <input type="text" name="title" style="display:none;" value="{{ title }}" hidden>
+                <textarea name="desc" maxlength="500" form="uploadForm"
+                          style="width:295px;overflow:hidden;resize:none;display:none;" rows="3"
+                          hidden>{{ desc }}</textarea>
+                <input type="text" name="tags" style="display:none;" value="{{ tags }}" hidden>
+                <center>
+                    <table class="dataEntryTableSmall">
+                        <tbody>
+                        <tr>
+                            <td width="125px" valign="top" align="right"><span
+                                        style="font-size: 14px;font-weight:bold;">File:</span></td>
+                            <td style="background-color:#FEFFE0; color:#808536; padding:13px;"><input type="file"
+                                                                                                      name="fileToUpload"
+                                                                                                      id="fileToUpload"
+                                                                                                      style="color:black"
+                                                                                                      accept="video/mp4,video/x-ms-wmv,video/x-msvideo,video/quicktime,video/x-flv,video/x-matroska"
+                                                                                                      required=""><br>
+                                <p><b>Max file size: 50 MB. No copyrighted or obscene material.</b><br>After uploading,
+                                    you can edit or remove this video at anytime under the "My Videos" link on the top
+                                    of the page.</p></td>
+                        </tr>
+                        <tr>
+                            <td valign="top" align="right"><span></span></td>
+                            <td><br>
+                                <h3>PLEASE BE PATIENT, THIS MAY TAKE SEVERAL MINUTES. ONCE COMPLETED, YOU WILL SEE A
+                                    CONFIRMATION MESSAGE.</h3></td>
+                        </tr>
+                        <tr>
+                            <td width="" align="right" style="white-space: nowrap;"></td>
+                            <td>
+                                <br>
+                                <input type="submit" id="upload" name="upload" value="Upload Video">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </form>
+        </div>
+		{% endif %}
+    {% endblock %}
