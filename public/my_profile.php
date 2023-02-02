@@ -9,7 +9,7 @@ namespace RePok {
     $page = "settings";
 
 // FIXME: actually calculate this shit
-    $coppaYearBS = date('Y') - 14;
+    $coppaYearBS = date('Y') - 13;
 
     $birthday = explode('-', $userdata['birthday']);
 

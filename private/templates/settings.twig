@@ -2,12 +2,19 @@
 {% block title %}Settings{% endblock %}
 {% block content %}
     <form action="my_profile.php" method="post">
-    <div class="formTitle">My profile</div>
-	<center>
+    <div class="formTitle">My Profile</div>
     <table class="dataEntryTableSmall">
         <tr>
+            <td valign="middle" align="right" style="color: gray;">
+                <b>Profile information</b>
+            </td>
+            <td style="color: gray;">
+                <p>These are showed on your channel's profile.</p>
+            </td>
+        </tr>
+        <tr>
             <td valign="middle" align="right">
-                <span style="font-size: 14px;font-weight:bold;">Name</span>
+                <span style="font-size: 14px;font-weight:bold;">Display name</span>
             </td>
             <td class="b"><input type="text" name="title" size="45" maxlength="256" style="width:295px"
                                  value="{{ userdata.title }}"></td>
@@ -30,19 +37,6 @@
             <td class="b"><input type="text" name="location" size="45" maxlength="128" style="width:295px"
                                  value="{{ userdata.location }}"></td>
         </tr>
-        {% if glob_forum %}
-            <tr>
-                <td valign="middle" align="right">
-         <span style="font-size: 14px;font-weight:bold;">
-         Forum signature
-         </span>
-                </td>
-                <td class="b"><textarea name="signature" rows="5" cols="80" wrap="virtual"
-                                        style="width:295px">{{ userdata.signature }}</textarea></td>
-            </tr>
-        {% else %}
-            <input type="hidden" name="signature" value="{{ userdata.signature }}">
-        {% endif %}
         <tr>
             <td valign="middle" align="right">
                 <span style="font-size: 14px;font-weight:bold;">Birthday</span>
@@ -57,7 +51,7 @@
         </tr>
         <tr>
             <td valign="middle" align="right">
-                <span style="font-size: 14px;font-weight:bold;">Relationship Status</span>
+                <span style="font-size: 14px;font-weight:bold;">Relationship status</span>
             </td>
             <td class="b">
                 <select name="relationship" id="relationship">
@@ -81,33 +75,37 @@
                 </select>
             </td>
         </tr>
-		<tr>
-        <td valign="middle" align="right">
-      <span style="font-size: 14px;font-weight:bold;">
-      Use Flash Player
-        </td>
-        </span>
-        <td class="b">
-			<input type="checkbox" id="flash" name="flash" value="true">
-        </td>
-		</tr>
-		<tr>
-        <td valign="middle" align="right">
-      <span style="font-size: 14px;font-weight:bold;">
-      Timezone
-        </td>
-        </span>
-        <td class="b">
-            <select name="timezone">
-                {% for timezone in timezones %}
-                    <option value="{{ timezone }}" {% if userdata.timezone == timezone %}selected{% endif %}
-                            style="width:295px">{{ timezone }}</option>
-                {% endfor %}
-            </select>
-        </td>
+        <tr>
+            <td valign="middle" align="right" style="color: gray;">
+                <b>Site-related options</b>
+            </td>
+            <td style="color: gray;">
+                <p>These are local options used by the website.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="middle" align="right">
+                <span style="font-size: 14px;font-weight:bold;">Flash video player</span>
+            </td>
+            </span>
+            <td class="b">
+                <input type="checkbox" id="flash" name="flash" value="true">
+            </td>
+        </tr>
+        <tr>
+            <td valign="middle" align="right">
+                <span style="font-size: 14px;font-weight:bold;">Timezone</span>
+            </td>
+            <td class="b">
+                <select name="timezone">
+                    {% for timezone in timezones %}
+                        <option value="{{ timezone }}" {% if userdata.timezone == timezone %}selected{% endif %}
+                                style="width:295px">{{ timezone }}</option>
+                    {% endfor %}
+                </select>
+            </td>
         </tr>
     </table>
-	</center>
     <input type="hidden" name="magic" value="please change my settings :)">
     <input type="submit" name="action" value="Save Changes">
 {% endblock %}
