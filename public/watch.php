@@ -38,9 +38,7 @@ namespace rePok {
         $isFlash = false;
     }
 
-    $commentCount = $sql->fetch("SELECT COUNT(id) FROM comments WHERE id=?", [$videoData['video_id']]) ['COUNT(id)'];
     $favoritesCount = $sql->fetch("SELECT COUNT(user_id) FROM favorites WHERE user_id=?", [$videoData['u_id']]) ['COUNT(user_id)'];
-    $viewCount = $sql->fetch("SELECT COUNT(video_id) FROM views WHERE video_id=?", [$videoData['video_id']]) ['COUNT(video_id)'];
 
     $previousRecentView = $sql->result("SELECT most_recent_view from videos WHERE video_id = ?", [$id]);
 
@@ -51,8 +49,6 @@ namespace rePok {
         'video' => $videoData,
         'comments' => $commentData,
         'favorites' => $favoritesCount,
-        'comCount' => $commentCount,
-        'viewCount' => $viewCount,
         'recentView' => $previousRecentView,
         'allVideos' => $allVideos,
         'isFlash' => $isFlash,

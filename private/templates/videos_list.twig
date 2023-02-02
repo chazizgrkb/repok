@@ -1,7 +1,7 @@
 {% extends "_layout_videolist.twig" %}
 {% block title %}Settings{% endblock %}
 {% block content %}
-    {% if pageName == "embed_list" %}
+    {% if page == "embed_list" %}
         <div style="font-weight: bold; padding: 3px; margin-left: 5px; margin-right: 5px; border-bottom: 1px dashed #999;">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tbody>
@@ -14,6 +14,29 @@
                             <a href="https://pok.byteemail.com/" target="_blank"><img src="img/logo_sm.gif" width="38"
                                                                                       height="15" border="0"></a>
                         </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    {% if page == "recommended" %}
+        <div class="moduleFrameEntrySelected">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <tr valign="top">
+                    <td><a href="watch.php?v={{ currentVideo.video_id }}" class="bold" target="_parent"><img
+                                    src="get_still.php?video_id={{ currentVideo.video_id }}" class="moduleEntryThumb"
+                                    width="80" height="60"></a></td>
+                    <td width="100%">
+                        <div class="moduleFrameTitle"><a href="watch.php?v={{ currentVideo.video_id }}"
+                                                         target="_parent">{{ currentVideo.title }}</a></div>
+                        <div class="moduleFrameDetails">Added: {{ currentVideo.time|date("F j, Y") }}<br>by <a
+                                    href="/profile?user={{ currentVideo.u_name }}" target="_parent">{{ currentVideo.u_name }}</a>
+                        </div>
+                        <div class="moduleFrameDetails">Views: {{ currentVideo.views }} <br> Comments: {{ currentVideo.comments }}
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold; padding: 4px 6px 4px 6px; background-color:#FFCC66; color: #AA7733; ">&lt;&lt;&lt; NOW PLAYING!</div>
                     </td>
                 </tr>
                 </tbody>
@@ -43,7 +66,7 @@
             </table>
         </div>
     {% else %}
-        {% if pageName == "embed_list" %}
+        {% if page == "embed_list" %}
             {{ userpagedata.name }} hasen't uploaded any videos!
         {% else %}
             There are no other videos.
