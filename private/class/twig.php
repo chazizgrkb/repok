@@ -2,7 +2,7 @@
 
 namespace RePok {
 
-    use ParsedownExtended;
+    use Parsedown;
     use Twig\Extension\AbstractExtension;
     use Twig\TwigFilter;
     use Twig\TwigFunction;
@@ -29,27 +29,27 @@ namespace RePok {
 
                 // Markdown function for non-inline text, sanitized.
                 new TwigFilter('markdown', function ($text) {
-                    $markdown = new ParsedownExtended();
+                    $markdown = new Parsedown();
                     $markdown->setSafeMode(true);
                     return $markdown->text($text);
                 }, ['is_safe' => ['html']]),
 
                 // Markdown function for inline text, sanitized.
                 new TwigFilter('markdown_inline', function ($text) {
-                    $markdown = new ParsedownExtended();
+                    $markdown = new Parsedown();
                     $markdown->setSafeMode(true);
                     return $markdown->line($text);
                 }, ['is_safe' => ['html']]),
 
                 // Markdown function for non-inline text. **NOT SANITIZED, DON'T LET IT EVER TOUCH USER INPUT**
                 new TwigFilter('markdown_unsafe', function ($text) {
-                    $markdown = new ParsedownExtended();
+                    $markdown = new Parsedown();
                     return $markdown->text($text);
                 }, ['is_safe' => ['html']]),
 
-                new TwigFilter('relative_time', 'relativeTime'),
+                new TwigFilter('relative_time', '\RePok\relativeTime'),
 
-                new TwigFilter('cmt_num_to_type', 'cmtNumToType'),
+                new TwigFilter('cmt_num_to_type', '\RePok\cmtNumToType'),
 
             ];
         }

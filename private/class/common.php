@@ -25,7 +25,10 @@ namespace RePok {
 
     $userfields = Users::userfields();
     $videofields = Videos::videofields();
-    $accountfields = "id, name, email, customcolor, title, about, powerlevel, joined, lastview";
+    $accountfields = "id, name, email, customcolor, title, about, location, powerlevel, timezone, relationshipStatus, 
+    gender, joined, lastview, birthday";
+
+    $domain = (isset($_SERVER['HTTPS']) ? "https" : "http").'://'.$_SERVER["HTTP_HOST"];
 
     // Cookie authentication, just like squareBracket.
     if (isset($_COOKIE['REPOK_TOKEN'])) {
@@ -45,7 +48,7 @@ namespace RePok {
 
     if ($log) {
         $userdata = $sql->fetch("SELECT $accountfields FROM users WHERE id = ?", [$id]);
-        $messages = $sql->result("SELECT COUNT(*) FROM messages m WHERE reciever = ?", [$userdata['id']]);
+        $messages = $sql->result("SELECT COUNT(*) FROM messages m WHERE isread = 0 AND reciever = ?", [$userdata['id']]);
         //$userbandata = $sql->fetch("SELECT * FROM bans WHERE userid = ?", [$id]);
     } else {
         $userdata['powerlevel'] = 1;

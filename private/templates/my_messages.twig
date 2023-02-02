@@ -23,7 +23,7 @@
                                 <div class="moduleTitle">My Messages</div>
                             </td>
                             <td align="right">
-                                <div style="font-weight: color: #444; margin-right: 5px;">
+                                <div style="color: #444; margin-right: 5px;">
                                     <b>1-10</b> of <b>{{ count }}</b>
                                 </div>
                             </td>
@@ -32,7 +32,7 @@
                     </table>
                 </div>
                 {% for message in inbox %}
-                    <div class="moduleEntry">
+                    <div class="{% if message.isread %}moduleEntry{% else %}moduleEntrySelected{% endif %}">
                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                             <tr valign="top">

@@ -37,6 +37,8 @@ namespace RePok {
         $twig->addGlobal('uri', $uri);
         $twig->addGlobal('pagename', substr($_SERVER['PHP_SELF'], 0, -4));
         $twig->addGlobal('page', $page);
+        $twig->addGlobal("domain", $domain);
+        $twig->addGlobal("page_url", sprintf("%s%s", $domain, $_SERVER['REQUEST_URI']));
 
         return $twig;
     }
@@ -85,7 +87,7 @@ namespace RePok {
             return twigloader('components')->render('level.twig', ['level' => $level, 'featured' => $featured, 'img' => $img, 'page' => $page]);
         });
     }
-    function relativeTime($time, $truncate)
+    function relativeTime($time, $truncate = true)
     {
         if (!$time) return 'never';
 
