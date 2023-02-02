@@ -15,8 +15,10 @@ namespace RePok {
     {
         global $userdata, $messages, $log, $lpp, $footerlinks, $domain, $uri, $debugMode, $page;
 
+        // this ugly hack is also on opensb
+        chdir(__DIR__);
         chdir('../');
-        $loader = new FilesystemLoader('private/templates/' . $subfolder);
+        $loader = new FilesystemLoader('templates/' . $subfolder);
 
         $twig = new Environment($loader, [
             'cache' => false,

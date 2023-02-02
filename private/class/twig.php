@@ -12,14 +12,13 @@ namespace RePok {
         public function getFunctions()
         {
             return [
-                new TwigFunction('level', 'level', ['is_safe' => ['html']]),
-                new TwigFunction('userlink', 'userlink', ['is_safe' => ['html']]),
-                new TwigFunction('comments', 'comments', ['is_safe' => ['html']]),
-                new TwigFunction('pagination', 'pagination', ['is_safe' => ['html']]),
-                new TwigFunction('custom_info', 'customInfo', ['is_safe' => ['html']]),
-                new TwigFunction('is_android_webview', 'isAndroidWebview', ['is_safe' => ['html']]),
-                new TwigFunction('git_commit', 'gitCommit'),
-                new TwigFunction('custom_header', 'customHeader'),
+                new TwigFunction('level', '\RePok\level', ['is_safe' => ['html']]),
+                new TwigFunction('userlink', '\RePok\userlink', ['is_safe' => ['html']]),
+                new TwigFunction('comments', '\RePok\comments', ['is_safe' => ['html']]),
+                new TwigFunction('pagination', '\RePok\pagination', ['is_safe' => ['html']]),
+                new TwigFunction('custom_info', '\RePok\customInfo', ['is_safe' => ['html']]),
+                new TwigFunction('git_commit', '\RePok\gitCommit'),
+                new TwigFunction('custom_header', '\RePok\customHeader'),
             ];
         }
 

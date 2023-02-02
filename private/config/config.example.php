@@ -11,3 +11,4 @@ $debugMode = true;
 
 $ffmpegPath = '';
 $ffprobePath = '';
+$lpp = 20; // p2/sb thing

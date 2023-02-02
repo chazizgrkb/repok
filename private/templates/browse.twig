@@ -3,21 +3,21 @@
         <table align="center" cellpadding="5" cellspacing="0" border="0">
             <tbody>
             <tr>
-                <td {% if pageName == "browseMain" %}class="bold">{% else %}><a href="browse.php">{% endif %}Most
-                        Recent{% if pageName == "browseMain" %}</td>
+                <td {% if page == "browseMain" %}class="bold">{% else %}><a href="browse.php">{% endif %}Most
+                        Recent{% if page == "browseMain" %}</td>
                 {% else %}</a></td>{% endif %}
                 <td>|</td>
-                <td {% if pageName == "browsePopular" %}class="bold">{% else %}><a href="browse.php?s=mp">{% endif %}
-                        Most Popular{% if pageName == "browsePopular" %}</td>{% else %}</a></td>{% endif %}
+                <td {% if page == "browsePopular" %}class="bold">{% else %}><a href="browse.php?s=mp">{% endif %}
+                        Most Popular{% if page == "browsePopular" %}</td>{% else %}</a></td>{% endif %}
                 <td>|</td>
-                <td {% if pageName == "browseDiscussed" %}class="bold">{% else %}><a href="browse.php?s=md">{% endif %}
-                        Most Discussed{% if pageName == "browseDiscussed" %}</td>{% else %}</a></td>{% endif %}
+                <td {% if page == "browseDiscussed" %}class="bold">{% else %}><a href="browse.php?s=md">{% endif %}
+                        Most Discussed{% if page == "browseDiscussed" %}</td>{% else %}</a></td>{% endif %}
                 <td>|</td>
-                <td {% if pageName == "browseFavorited" %}class="bold">{% else %}><a href="browse.php?s=mf">{% endif %}
-                        Most Added to Favorites{% if pageName == "browseFavorited" %}</td>{% else %}</a></td>{% endif %}
+                <td {% if page == "browseFavorited" %}class="bold">{% else %}><a href="browse.php?s=mf">{% endif %}
+                        Most Added to Favorites{% if page == "browseFavorited" %}</td>{% else %}</a></td>{% endif %}
                 <td>|</td>
-                <td {% if pageName == "browseRandom" %}class="bold">{% else %}><a href="browse.php?s=r">{% endif %}
-                        Random{% if pageName == "browseRandom" %}</td>{% else %}</a></td>{% endif %}
+                <td {% if page == "browseRandom" %}class="bold">{% else %}><a href="browse.php?s=r">{% endif %}
+                        Random{% if page == "browseRandom" %}</td>{% else %}</a></td>{% endif %}
             </tr>
             </tbody>
         </table>
