@@ -3,6 +3,6 @@ Right now, this is currently an attempt at refactoring the pokTwo's source code 
 
 ## Credits
 
-Billygoat891: Video player
-Icantellyou: Video uploader
-ROllerozxa: A lot of the internals come from his project principia-web.
+* Billygoat891: Video player
+* Icantellyou: Video uploader
+* ROllerozxa: A lot of the internals come from his project principia-web.
