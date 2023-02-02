@@ -8,3 +8,6 @@ $mysql_auth = [
 ];
 
 $debugMode = true;
+
+$ffmpegPath = '';
+$ffprobePath = '';

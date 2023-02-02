@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6890021e-35fb-49e4-954a-73b4e111218a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/private/templates/index.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/repok.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/repok.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/private/class/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/private/class/common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/private/class/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/private/class/layout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/private/config/config.example.php" beforeDir="false" afterPath="$PROJECT_DIR$/private/config/config.example.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img" beforeDir="false" afterPath="$PROJECT_DIR$/public/img" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/private/templates/watch.twig" beforeDir="false" afterPath="$PROJECT_DIR$/private/templates/watch.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +40,16 @@
       <path value="$PROJECT_DIR$/vendor/mpratt/relativetime" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/php-ffmpeg/php-ffmpeg" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/spatie/temporary-directory" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
     </include_path>
   </component>
   <component name="ProjectId" id="2L9CyeHLempfHB5bXja5rSOelul" />
@@ -81,7 +87,7 @@
       <workItem from="1675274169534" duration="12000" />
       <workItem from="1675274185396" duration="6271000" />
       <workItem from="1675286270401" duration="5362000" />
-      <workItem from="1675293383720" duration="1156000" />
+      <workItem from="1675293383720" duration="4829000" />
     </task>
     <servers />
   </component>

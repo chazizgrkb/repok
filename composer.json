@@ -3,6 +3,7 @@
         "twig/twig": "^3.0",
         "benjaminhoegh/parsedown-extended": "^1.1",
         "mpratt/relativetime": "^1.5",
-        "filp/whoops": "^2.14"
+        "filp/whoops": "^2.14",
+        "php-ffmpeg/php-ffmpeg": "^1.1"
     }
 }
