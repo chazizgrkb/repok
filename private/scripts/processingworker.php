@@ -21,6 +21,8 @@ namespace RePok {
 
     $new = $argv[1];
     $target_file = $argv[2];
+    $preload_folder = dirname(__DIR__) . "/../dynamic/preload/" . $new;
+
     try {
         $ffmpeg = FFMpeg::create($config);
         $ffprobe = FFProbe::create($config);
@@ -73,13 +75,15 @@ namespace RePok {
         $video->save($h264, dirname(__DIR__) . '/../dynamic/videos/' . $new . '.mp4');
         $video->save($flv, dirname(__DIR__) . '/../dynamic/videos/' . $new . '.flv');
         debug_print_backtrace();
-        unlink($target_file);
-        delete_directory($preload_folder);
 
         $videoData = $sql->fetch("SELECT $userfields v.* FROM videos v JOIN users u ON v.author = u.id WHERE v.video_id = ?", [$new]);
 
         $sql->query("UPDATE videos SET videolength = ?, flags = ? WHERE video_id = ?",
             [ceil($duration), $videoData['flags'] ^ 0x2, $new]);
+        
+        unlink($target_file);
+        delete_directory($preload_folder);
+
     } catch (Exception $e) {
         echo "rePok uploader processor FAIL:" . $e->getMessage();
     }
