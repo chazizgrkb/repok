@@ -19,9 +19,8 @@ namespace rePok {
         if (!$name || !$pass || !$logindata || !password_verify($pass, $logindata['password'])) $error .= 'Invalid credentials.';
 
         if ($error == '') {
-            setcookie("REPOK_TOKEN", $logindata['token'], 2147483647);
-            $nid = $sql->result("SELECT id FROM users WHERE token = ?", [$logindata['token']]);
-            $sql->query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), getUserIpAddr(), $nid]);
+            $_SESSION['token'] = $logindata['token'];
+            $sql->query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), getUserIpAddr(), $logindata['id']]);
 
             redirect('./');
         }

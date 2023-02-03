@@ -30,19 +30,23 @@ namespace RePok {
 
     $domain = (isset($_SERVER['HTTPS']) ? "https" : "http").'://'.$_SERVER["HTTP_HOST"];
 
-    // Cookie authentication, just like squareBracket.
-    if (isset($_COOKIE['REPOK_TOKEN'])) {
-        $id = $sql->result("SELECT id FROM users WHERE token = ?", [$_COOKIE['REPOK_TOKEN']]);
+    session_name("rpsess");
+    session_start();
+
+    // Session-based authentication, as HWD claims that the openSB auth check was a shit implementation. -grkb 2/2/2023
+    if (isset($_SESSION['token'])) {
+        $id = $sql->result("SELECT id FROM users WHERE token = ?", [$_SESSION['token']]);
 
         if ($id) {
-            // Valid cookie, logged in
+            // Valid token, logged in
             $log = true;
         } else {
-            // Invalid cookie, not logged in
+            // Invalid token, not logged in
+            session_destroy();
             $log = false;
         }
     } else {
-        // No cookie, not logged in
+        // No token, not logged in
         $log = false;
     }
 
