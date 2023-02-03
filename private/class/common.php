@@ -58,6 +58,12 @@ namespace RePok {
         $userdata['powerlevel'] = 1;
     }
 
+    /* any browsers with mozilla 4 user agent are definitely likely going to need the
+    / flash player. we don't have a proper way of detecting old browsers so just do this. -grkb 2/3/2023 */
+    if (preg_match('~Mozilla/4~i', $_SERVER['HTTP_USER_AGENT'])) {
+        $_COOKIE['useFlashPlayer'] = true;
+    }
+
     $error_handling = new Run;
     $error_handling->pushHandler(new PrettyPageHandler);
     $error_handling->register();
