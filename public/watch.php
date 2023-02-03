@@ -8,11 +8,9 @@ namespace rePok {
 
     $videoData = Videos::getVideoData($userfields, $id);
 
-    if (!$videoData) error('404', "The video you were looking for cannot be found.");
-
     $commentData = VideoComments::getComments($id);
 
-    $pageName = "watch";
+    $page = "watch";
 
     $allVideos = $sql->result("SELECT COUNT(id) FROM videos WHERE author=?", [$videoData['u_id']]);
 
