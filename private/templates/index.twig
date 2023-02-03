@@ -23,21 +23,28 @@
                                         <tr valign="top">
                                             <td width="60%"
                                                 style="border-right: 1px dashed #369; padding: 0px 10px 10px 10px; color: #444;">
-                                                <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">My
-                                                    Account Overview
+                                                <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                                                    My Account Overview
                                                 </div>
-                                                <strong>User Name</strong>: <a
-                                                        href="/profile.php?user={{ userdata.name }}">{{ userdata.name }}</a><br>
-                                                <strong>Email</strong>: {{ userdata.email }}<br>
+                                                <div>
+                                                    <b>User Name</b>: <a
+                                                            href="/profile.php?user={{ userdata.name }}">{{ userdata.name }}</a>
+                                                    <br>
+                                                    <b>Email</b>: {{ userdata.email }}
+                                                    <br>
+                                                    <b>Videos watched</b>: (placeholder)
+                                                </div>
                                             </td>
                                             <td width="40%" style="padding: 0px 10px 10px 10px; color: #444;">
-                                                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">
-                                                    Things To Do
+                                                {% if message_count == 0 %}
+                                                    {% set inbox_icon = '/img/mail.gif' %}
+                                                {% else %}
+                                                    {% set inbox_icon = '/img/mail_unread.gif' %}
+                                                {% endif %}
+                                                <div>
+                                                    <img src="{{ inbox_icon }}" style="vertical-align: middle;">
+                                                    <span>You have <a href="my_messages.php">{{ message_count }} new messages</a>.</span>
                                                 </div>
-                                                <ul>
-                                                    <li><a href="/my_profile.php">Edit Your Profile</a></li>
-                                                    <li><a href="/my_videos_upload.php">Upload A Video</a></li>
-                                                </ul>
                                             </td>
                                         </tr>
                                     {% else %}
