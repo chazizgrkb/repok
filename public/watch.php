@@ -31,9 +31,9 @@ namespace rePok {
     if (isset($_COOKIE['useFlashPlayer'])) {
         $isFlash = $_COOKIE['useFlashPlayer'];
     } elseif (isset($_GET['detectflash']) && $_GET['detectflash'] == "false") { // flash object mentions this in bypassTxt.
-        $isFlash = true;
+        $isFlash = true; // use the flash player that plays the sorenson flv video.
     } else {
-        $isFlash = false;
+        $isFlash = false; // use the html5 suxcox/poktwo/yoretude player that plays the h264 mp4 video.
     }
 
     $favoritesCount = $sql->fetch("SELECT COUNT(user_id) FROM favorites WHERE user_id=?", [$videoData['u_id']]) ['COUNT(user_id)'];

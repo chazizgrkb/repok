@@ -2,6 +2,10 @@
 <?php
 namespace rePok {
 
+    /* this processes the video into h264 for modern browsers and flv h263 sorenson for flash player-supported browsers.
+    while it might be nice to drop mp4  and use a js library for loading the flv file, it appears that bilibili's flv.js
+    library doesn't support sorenson, likely because it's proprietary shit. -grkb 2/3/2023 */
+
     use FFMpeg\Coordinate;
     use FFMpeg\FFMpeg;
     use FFMpeg\FFProbe;

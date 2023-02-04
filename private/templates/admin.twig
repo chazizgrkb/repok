@@ -3,50 +3,96 @@
 {% block title %}Admin panel{% endblock %}
 
 	{% block content %}
-		<link href="/img/admin.css" rel="stylesheet" type="text/css">
         <div class="tableSubTitle">Admin panel</div>
-        <p>Currently running rePok version {{ version }} (commit {{ git_commit() }}) on {{ operating_system() }}
-            . {{ profiler_stats() }}</p>
-        <table style="width: 100%;">
-            <tr>
-                <td class="nb" style="width:33%; vertical-align:top;">
-                    <table class="c1">
-                        <tr class="h">
-                            <td class="b" colspan="2">Latest registered users</td>
-                        </tr>
-                        {% for user in latest_registered_users %}
-                            <tr>
-                                <td class="b"><a href="profile.php?user={{ user.name }}">{{ user.name }}</a></td>
-                                <td class="b">{{ user.joined | date() }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+        <table width="100%">
+            <tr valign="top">
+                <td width="60%">
+                    <div class="mailMessageArea">
+                        <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                            Latest videos
+                        </div>
+                            {% for video in videos %}
+                                <table width="100%">
+                                    <tr>
+                                        <td width="25%">
+                                            <img src="get_still.php?still_id=1&amp;video_id={{ video.video_id }}" width="30">
+                                            <img src="get_still.php?still_id=2&amp;video_id={{ video.video_id }}" width="30">
+                                            <img src="get_still.php?still_id=3&amp;video_id={{ video.video_id }}" width="30">
+                                        </td>
+                                        <td width="75%">
+                                            <a href="watch.php?v={{ video.video_id }}">{{ video.title }}</a>
+                                            <br>{{ video.time | relative_time }} by  <a href="profile.php?user={{ video.u_name }}">{{ video.u_name }}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            {% endfor %}
+                    </div>
+                    <div class="mailMessageArea">
+                        <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                            Users
+                        </div>
+                            <table width="100%">
+                                <tr valign="top">
+                                    <td width="50%">
+                                        <div class="mailMessageArea">
+                                            <div class="highlight">Latest registered</div>
+                                            {% for user in latest_registered_users %}
+                                                <a href="profile.php?user={{ user.name }}">{{ user.name }}</a>
+                                                at {{ user.joined | date() }}
+                                                <br>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                    <td width="50%">
+                                        <div class="mailMessageArea">
+                                            <div class="highlight">Last signed in</div>
+                                            {% for user in latest_seen_users %}
+                                                <a href="profile.php?user={{ user.name }}">{{ user.name }}</a>
+                                                at {{ user.lastview | relative_time }}
+                                                <br>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </td>
-                <td class="nb" style="width:33%; vertical-align:top;">
-                    <table class="c1">
-                        <tr class="h">
-                            <td class="b" colspan="2">Latest seen users</td>
-                        </tr>
-                        {% for user in latest_seen_users %}
+                <td width="40%">
+                    <div class="mailMessageArea">
+                        <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                            Instance numbers
+                        </div>
+                        <table width="100%">
+                            {% for thing in things_to_count %}
+                                <tr>
+                                    <td width="40%">
+                                        {{ thing | title }}
+                                    </td>
+                                    <td width="60%">
+                                        {{ count[thing] }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="mailMessageArea">
+                        <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                            Server information
+                        </div>
+                        <table width="100%">
+                            {% for shit in serverStats %}
                             <tr>
-                                <td class="b"><a href="profile.php?user={{ user.name }}">{{ user.name }}</a></td>
-                                <td class="b">{{ user.lastview | relative_time }}</td>
+                                <td width="40%">
+                                    {{ shit.title }}
+                                </td>
+                                <td width="60%">
+                                    {{ shit.info }}
+                                </td>
                             </tr>
-                        {% endfor %}
-                    </table>
-                </td>
-                <td class="nb" style="width:33%; vertical-align:top;">
-                    <table class="c1">
-                        <tr class="h">
-                            <td class="b" colspan="2">Latest uploaded videos</td>
-                        </tr>
-                        {% for video in videos %}
-                            <tr>
-                                <td class="b"><a href="watch.php?v={{ video.video_id }}">{{ video.title }}</td>
-                                <td class="b">{{ video.time | relative_time }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -60,19 +106,4 @@
 				({{ comment.allFavorites }}) - ({{ comment.date | relative_time }}) | <a style="color: red;" href="/admin.php?action=delete_comment&id={{ comment.comment_id }}">DELETE!!!!!</a>
             </div>
 		{% endfor %}
-
-        <h3>Numbers</h3>
-
-        <table class="pageTable">
-            <tr class="h">
-                {% for thing in things_to_count %}
-                    <td class="b h" width=100>{{ thing | title }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for thing in things_to_count %}
-                    <td class="b">{{ count[thing] }}</td>
-                {% endfor %}
-            </tr>
-        </table>
     {% endblock %}
