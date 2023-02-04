@@ -1,6 +1,6 @@
 <?php
 
-namespace RePok {
+namespace rePok {
 
     use Parsedown;
     use Twig\Extension\AbstractExtension;

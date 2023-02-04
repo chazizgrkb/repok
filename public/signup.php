@@ -44,7 +44,7 @@ namespace rePok {
         if ($error == '') {
             $token = Users::register($name, $pass, $mail);
 
-            setcookie($cookieName, $token, 2147483647);
+            $_SESSION['token'] = $token;
             //makeProfileData($userdata['id']);
 
             redirect('./?rd');

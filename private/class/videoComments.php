@@ -1,6 +1,6 @@
 <?php
 
-namespace RePok {
+namespace rePok {
     class VideoComments extends Videos
     {
         static function addComment($videoID, $comment, $id)

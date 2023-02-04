@@ -1,6 +1,6 @@
 <?php
 
-namespace RePok {
+namespace rePok {
     class VideoTags extends Videos
     {
         /**

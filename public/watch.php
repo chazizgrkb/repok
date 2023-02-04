@@ -30,7 +30,7 @@ namespace rePok {
 
     if (isset($_COOKIE['useFlashPlayer'])) {
         $isFlash = $_COOKIE['useFlashPlayer'];
-    } elseif ($_GET['flash'] ?? null) {
+    } elseif (isset($_GET['detectflash']) && $_GET['detectflash'] == "false") { // flash object mentions this in bypassTxt.
         $isFlash = true;
     } else {
         $isFlash = false;

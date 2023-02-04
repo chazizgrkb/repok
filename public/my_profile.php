@@ -1,6 +1,6 @@
 <?php
 
-namespace RePok {
+namespace rePok {
 
     require_once dirname(__DIR__) . '/private/class/common.php';
 
@@ -17,7 +17,6 @@ namespace RePok {
         $title = $_POST['title'] ? $_POST['title'] : null;
         $about = $_POST['about'] ? $_POST['about'] : null;
         $location = $_POST['location'] ? $_POST['location'] : null;
-        $signature = $_POST['signature'] ? $_POST['signature'] : null;
         $timezone = $_POST['timezone'] != 'America/New_York' ? $_POST['timezone'] : null;
         $year = $_POST['year'] ? $_POST['year'] : null;
         $month = $_POST['month'] ? $_POST['month'] : null;
@@ -46,8 +45,8 @@ namespace RePok {
 
         setcookie('useFlashPlayer', $flash, 2147483647);
 
-        $sql->query("UPDATE users SET title = ?, about = ?, location = ?, timezone = ?, signature = ?, birthday = ?, relationshipStatus = ?, gender = ? WHERE id = ?",
-            [$title, $about, $location, $timezone, $signature, $dob, $relationStatus, $genderShit, $userdata['id']]);
+        $sql->query("UPDATE users SET title = ?, about = ?, location = ?, timezone = ?, birthday = ?, relationshipStatus = ?, gender = ? WHERE id = ?",
+            [$title, $about, $location, $timezone, $dob, $relationStatus, $genderShit, $userdata['id']]);
 
         redirect(sprintf("/profile.php?user=%s&edited", $userdata['name']));
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace RePok {
+namespace rePok {
     class Videos
     {
         // this is like that so that it stays readable in the code and doesn't introduce a fucking huge horizontal scrollbar on GitHub. -grkb 3/31/2022
@@ -173,8 +173,8 @@ namespace RePok {
          */
         static function getFlashVideo($videoID): string
         {
-            if (isset($videoID) ? $videoID : null) {
-                $file = "/dynamic/" . $videoID . ".flv";
+            if ($videoID ?? null) {
+                $file = "dynamic/videos/" . $videoID . ".flv";
                 return $file;
             } else {
                 die("getFlashVideo Error: videoID is missing!");

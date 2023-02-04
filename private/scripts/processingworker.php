@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-namespace RePok {
+namespace rePok {
 
     use FFMpeg\Coordinate;
     use FFMpeg\FFMpeg;
