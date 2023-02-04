@@ -85,7 +85,7 @@ namespace rePok {
     }
 
     /**
-     * Get the IP address of the user. Scandal incoming!
+     * Get the IP address of the use and hash it.
      *
      * @return mixed
      */
@@ -102,6 +102,6 @@ namespace rePok {
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
-        return $ip;
+        return crypt($ip, $ip);
     }
 }

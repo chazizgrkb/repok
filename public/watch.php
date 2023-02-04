@@ -14,8 +14,8 @@ namespace rePok {
 
     $allVideos = $sql->result("SELECT COUNT(id) FROM videos WHERE author=?", [$videoData['u_id']]);
 
-    if ($sql->fetch("SELECT COUNT(video_id) FROM views WHERE video_id=? AND user=?", [$videoData['video_id'], crypt($ip, $ip)]) ['COUNT(video_id)'] < 1) {
-        $sql->query("INSERT INTO views (video_id, user) VALUES (?,?)", [$videoData['video_id'], crypt($ip, $ip)]);
+    if ($sql->fetch("SELECT COUNT(video_id) FROM views WHERE video_id=? AND user=?", [$videoData['video_id'], $ip]) ['COUNT(video_id)'] < 1) {
+        $sql->query("INSERT INTO views (video_id, user) VALUES (?,?)", [$videoData['video_id'], $ip]);
     }
 
     if ($log) {
