@@ -5,6 +5,29 @@ namespace rePok {
     use Twig\Environment;
     use Twig\Loader\FilesystemLoader;
 
+    function availableThemes()
+    {
+        return array(
+            "yt" => array(
+                "id" => "yt",
+                "name" => "YouTube",
+                "logo" => "img/logo_sm.gif",
+                "override" => false,
+            ),
+            "pt" => array(
+                "id" => "pt",
+                "name" => "PokTube - February 2021",
+                "logo" => "img/pt_feb/logo_sm.gif",
+                "override" => "/img/pt_feb/styles.css",
+            ),
+        );
+    }
+
+    function getTheme()
+    {
+        return $_COOKIE['rptheme'] ?? "yt";
+    }
+
     /**
      * Twig loader, initializes Twig with standard configurations and extensions.
      *
@@ -28,6 +51,7 @@ namespace rePok {
         // Add repok specific extension
         $twig->addExtension(new RepokExtension());
 
+        $twig->addGlobal('theme', availableThemes()[getTheme()]);
         $twig->addGlobal('userdata', $userdata);
         $twig->addGlobal('message_count', $messages);
         $twig->addGlobal('log', $log);
