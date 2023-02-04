@@ -56,6 +56,16 @@
                                 </tr>
                             </table>
                         </div>
+                    <div class="mailMessageArea">
+                        <div style="font-size: 16px; font-weight: bold; color:#003366; margin-bottom: 5px;">
+                            Comments
+                        </div>
+                            {% for comment in comments %}
+                                <div class="commentsEntry">"{{ comment.comment }}"<br> - <a
+                                            href="profile.php?user={{ comment.u_name }}">{{ comment.u_name }}</a> on <a href="/watch.php?v={{ comment.id }}">{{ comment.title }}</a> //
+                                   ({{ comment.date | relative_time(false) }}) | <a style="color: red;" href="/admin.php?action=delete_comment&id={{ comment.comment_id }}">Delete</a>
+                                </div>
+                            {% endfor %}
                     </div>
                 </td>
                 <td width="40%">
@@ -96,14 +106,4 @@
                 </td>
             </tr>
         </table>
-		
-		<h3>Comments</h3>
-		{% for comment in comments %}
-			<div class="commentsEntry">"{{ comment.comment }}"<br> - <a
-				href="profile.php?user={{ comment.u_name }}">{{ comment.u_name }}</a> on <a href="/watch.php?v={{ comment.id }}">{{ comment.title }}</a> // <a
-				href="profile_videos.php?user={{ comment.u_name }}">Videos</a> ({{ comment.allVideos }})
-				| <a href="profile_favorites.php?user={{ comment.u_name }}">Favorites</a>
-				({{ comment.allFavorites }}) - ({{ comment.date | relative_time }}) | <a style="color: red;" href="/admin.php?action=delete_comment&id={{ comment.comment_id }}">DELETE!!!!!</a>
-            </div>
-		{% endfor %}
     {% endblock %}
