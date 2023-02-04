@@ -99,7 +99,7 @@
                     <script type="text/javascript">
                         // <![CDATA[
 
-                        var fo = new FlashObject("/player.swf?video_id={{ video.video_id }}&l=30", "player", "425", "350", 7, "#FFFFFF");
+                        var fo = new FlashObject("/player.swf?video_id={{ video.video_id }}&l={{ video.videolength }}", "player", "425", "350", 7, "#FFFFFF");
                         fo.write("flashcontent");
 
                         // ]]>

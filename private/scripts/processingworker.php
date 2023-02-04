@@ -83,7 +83,7 @@ namespace rePok {
         $videoData = $sql->fetch("SELECT $userfields v.* FROM videos v JOIN users u ON v.author = u.id WHERE v.video_id = ?", [$new]);
 
         $sql->query("UPDATE videos SET videolength = ?, flags = ? WHERE video_id = ?",
-            [ceil($duration), $videoData['flags'] ^ 0x2, $new]);
+            [round($duration / $framerate), $videoData['flags'] ^ 0x2, $new]);
         
         unlink($target_file);
         delete_directory($preload_folder);
