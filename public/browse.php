@@ -4,8 +4,8 @@ namespace rePok {
     require_once dirname(__DIR__) . '/private/class/common.php';
 
     $section = ($_GET['s'] ?? null);
-    $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? $_GET['page'] : 1);
-    $limit = sprintf("%s,%s", (($page - 1) * $lpp), $lpp);
+    $pageNumber = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? $_GET['page'] : 1);
+    $limit = sprintf("%s,%s", (($pageNumber - 1) * $lpp), $lpp);
 
     if ($section == "mp") {
         $videoData = Videos::getVideos("views DESC", $limit);
@@ -30,7 +30,7 @@ namespace rePok {
 
     echo $twig->render('browse.twig', [
         'videos' => $videoData,
-        'page' => $page,
+        'pageNumber' => $pageNumber,
         'level_count' => $count
     ]);
 }
