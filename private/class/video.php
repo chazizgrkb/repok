@@ -50,7 +50,11 @@ namespace rePok {
 
         static function videofields(): string
         {
-            return 'v.id, v.video_id, v.title, v.description, v.time, (SELECT COUNT(*) FROM views WHERE video_id = v.video_id) AS views, (SELECT COUNT(*) FROM comments WHERE id = v.video_id) AS comments, (SELECT COUNT(*) FROM favorites WHERE video_id = v.video_id) AS favorites, (SELECT COUNT(*) FROM favorites WHERE video_id = v.video_id) AS favorites, v.videolength, v.category_id, v.author';
+            return 'v.id, v.video_id, v.title, v.description, v.time, 
+            (SELECT COUNT(*) FROM views WHERE video_id = v.video_id) AS views, 
+            (SELECT COUNT(*) FROM comments WHERE id = v.video_id) AS comments, 
+            (SELECT COUNT(*) FROM favorites WHERE video_id = v.video_id) AS favorites,
+            v.flags, v.originalfile, v.videolength, v.category_id, v.author';
         }
 
         /**
@@ -62,13 +66,22 @@ namespace rePok {
          * @param string $whereEquals Precise the value of the column.
          * @return array A video list, ordered by what $orderBy specified.
          */
-        static function getVideos($orderBy, $limit, $whereSomething = null, $whereEquals = null): array
+        static function getVideos($orderBy, $limit, $whereSomething = null, $whereEquals = null, $onlyProcessed = true): array
         {
             global $userfields, $videofields, $sql;
-            if (isset($whereSomething)) {
-                $videoList = $sql->fetchArray($sql->query("SELECT $userfields $videofields FROM videos v JOIN users u ON v.author = u.id WHERE $whereSomething = ? AND flags != 0x2 ORDER BY $orderBy LIMIT $limit", [$whereEquals]));
+            if ($onlyProcessed) {
+                if (isset($whereSomething)) {
+                    $thing = "AND flags != 0x2";
+                } else {
+                    $thing = "WHERE flags != 0x2";
+                }
             } else {
-                $videoList = $sql->fetchArray($sql->query("SELECT $userfields $videofields FROM videos v JOIN users u ON v.author = u.id WHERE flags != 0x2 ORDER BY $orderBy LIMIT $limit"));
+                $thing = null;
+            }
+            if (isset($whereSomething)) {
+                $videoList = $sql->fetchArray($sql->query("SELECT $userfields $videofields FROM videos v JOIN users u ON v.author = u.id WHERE $whereSomething = ? $thing ORDER BY $orderBy LIMIT $limit", [$whereEquals]));
+            } else {
+                $videoList = $sql->fetchArray($sql->query("SELECT $userfields $videofields FROM videos v JOIN users u ON v.author = u.id $thing ORDER BY $orderBy LIMIT $limit"));
             }
             foreach ($videoList as &$video) {
                 $video['tags'] = VideoTags::getVideoTags($video['id']);
@@ -181,10 +194,12 @@ namespace rePok {
             }
         }
 
-        static function addVideo($new, $title, $description, $id, string $upload_file): void
+        static function addVideo($new, $title, $description, $id, string $upload_file, string $og_file): void
         {
             global $sql;
-            $sql->query("INSERT INTO videos (video_id, title, description, author, time, most_recent_view, videofile, flags) VALUES (?,?,?,?,?,?,?,?)", [$new, $title, $description, $id, time(), time(), $upload_file, 0x2]);
+            $sql->query("INSERT INTO videos (video_id, title, description, author, time, most_recent_view,
+                    videofile, originalfile, flags) VALUES (?,?,?,?,?,?,?,?,?)",
+                [$new, $title, $description, $id, time(), time(), $upload_file, $og_file, 0x2]);
         }
 
         static function bumpVideo(int $currentTime, $id): void

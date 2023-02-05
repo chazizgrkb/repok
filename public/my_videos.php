@@ -13,7 +13,7 @@ namespace rePok {
     $twig = twigloader();
 
     echo $twig->render('vidlist.twig', [
-        'videos' => Videos::getVideos('v.time DESC', $limit, 'v.author', $userdata['id']),
+        'videos' => Videos::getVideos('v.time DESC', $limit, 'v.author', $userdata['id'], false),
         'page' => $page,
         'count' => Users::getUserVideoCount($userdata['id']),
         'title' => "My Videos",

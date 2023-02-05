@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2023 at 03:25 AM
+-- Generation Time: Feb 05, 2023 at 06:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -222,6 +222,7 @@ CREATE TABLE `videos` (
   `flags` tinyint(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '8 bools to determine certain video properties',
   `category_id` int(11) DEFAULT 0 COMMENT 'Category ID for the video',
   `videofile` text DEFAULT NULL COMMENT 'Path to the video file(?)',
+  `originalfile` text NOT NULL DEFAULT 'null.null',
   `videolength` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'Length of the video in seconds'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

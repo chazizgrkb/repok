@@ -72,9 +72,14 @@
                                     <div class="moduleEntryDetails">Views: {{ video.views }} |
                                         Comments: {{ video.comments }}</div>
                                     <hr size="1">
-                                    <div class="moduleEntryDetails">File: todo.mp4</div>
+                                    <div class="moduleEntryDetails">File: {{ video.originalfile }}</div>
                                     <div class="moduleEntryDetails">Broadcast: <b style="color: green">Public Video</b></div>
-                                    <div class="moduleEntryDetails">Status: Live!</div>
+                                    {% if video.flags == '2' %}
+                                        {% set status = "Processing/Failed" %}
+                                    {% else %}
+                                        {% set status = "Live!" %}
+                                    {% endif %}
+                                    <div class="moduleEntryDetails">Status: {{ status }}</div>
                                 </td>
                             </tr>
                             </tbody>

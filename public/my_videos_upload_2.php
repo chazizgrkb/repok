@@ -53,7 +53,7 @@ namespace rePok {
         }
 
         if (move_uploaded_file($temp_name, $target_file)) {
-            Videos::addVideo($new, $title, $description, $userdata['id'], $upload_file);
+            Videos::addVideo($new, $title, $description, $userdata['id'], $upload_file, $_FILES['fileToUpload']['name']);
 
             $numID = $sql->result("SELECT id from videos WHERE video_id = ?", [$new]);
 
