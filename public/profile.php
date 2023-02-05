@@ -6,7 +6,7 @@ namespace rePok {
 
     require_once dirname(__DIR__) . '/private/class/common.php';
 
-    $pageName = "profile";
+    $name = "profile";
 
     if (isset($_GET['id'])) {
         $userpagedata = $sql->fetch("SELECT * FROM users WHERE id = ?", [$_GET['id']]);
