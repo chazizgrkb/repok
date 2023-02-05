@@ -60,7 +60,8 @@
                 <div style="font-size: 13px; font-weight: bold; text-align:center;">
                     <a href="mailto:?subject={{ video.title }}&amp;body={{ page_url }}">Share</a>
                     // <a href="#comment">Comment</a>
-                    // {% if isFavorited %}<a href="remove_favorites.php?video_id={{ video.video_id }}"
+                    // {% if isFavorited %}
+                    <a href="remove_favorites.php?video_id={{ video.video_id }}"
                                               target="invisible" onclick="return FavoritesHandler();">Remove from
                             Favorites</a>{% else %}<a href="add_favorites.php?video_id={{ video.video_id }}"
                                                       target="invisible" onclick="return FavoritesHandler();">Add to

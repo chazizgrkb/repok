@@ -236,11 +236,5 @@ ORDER BY v.time DESC $limit", [$id]);
             }
             return $videos;
         }
-
-        public static function addFavorite($id): void
-        {
-            global $sql;
-            $sql->query("INSERT INTO favorites (video_id, user_id) VALUES (?,?)", [$_GET['video_id'], $id]);
-        }
     }
 }
