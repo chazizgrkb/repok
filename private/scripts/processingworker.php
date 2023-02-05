@@ -36,7 +36,6 @@ namespace rePok {
         $h264->setAudioKiloBitrate(56)->setAdditionalParameters(array('-ar', '22050'));
         $flv->setAudioKiloBitrate(80)->setAdditionalParameters(array('-ar', '22050'));
 
-
         $video = $ffmpeg->open($target_file);
 
         //get frame count

@@ -61,7 +61,7 @@
 
 
                             <!-- end paging -->
-							{{ pagination(level_count, 5, (page_name == "profile_videos" ? "profile_videos.php" : "profile_favorites.php") ~ "?user="~ userpagedata.name ~"&page=%s", page) }}
+							{{ pagination(level_count, 5, (page_name == "profile_videos" ? "profile_videos.php" : "profile_favorites.php") ~ "?user="~ userpagedata.name ~"&page=%s", pageNumber) }}
                         </td>
                         <td><img src="img/pixel.gif" width="5" height="1"></td>
                     </tr>

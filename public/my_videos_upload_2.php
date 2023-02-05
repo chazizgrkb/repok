@@ -27,9 +27,9 @@ namespace rePok {
         $description = ($_POST['desc'] ?? '');
         $tags = ($_POST['tags'] ?? '');
         $tags2 = preg_split('/[\s,]+/', $tags); // parses both commas and spaces
-        if (count($tags2) < 3) {
+        /* if (count($tags2) < 3) {
             die("Less than 3 tags!"); // we should have an actual error page, but this is alpha shit, so meh.
-        }
+        } */
         $tagsIDbullshit = array();
         $number = 0;
         foreach ($tags2 as $tag) {
