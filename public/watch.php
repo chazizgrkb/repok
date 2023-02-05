@@ -3,7 +3,7 @@
 namespace rePok {
     require_once dirname(__DIR__) . '/private/class/common.php';
     $id = ($_GET['v'] ?? null);
-    $searchShit = ($_GET['search'] ?? null);
+    $searchQuery = ($_GET['search'] ?? null);
     $ip = getUserIpAddr();
 
     $videoData = Videos::getVideoData($userfields, $id);

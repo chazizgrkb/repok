@@ -36,7 +36,7 @@ namespace rePok {
      */
     function twigloader($subfolder = '', $customloader = null, $customenv = null)
     {
-        global $userdata, $messages, $log, $lpp, $footerlinks, $domain, $uri, $debugMode, $page;
+        global $userdata, $messages, $log, $lpp, $searchQuery, $domain, $uri, $debugMode, $page;
 
         // this ugly hack is also on opensb
         chdir(__DIR__);
@@ -56,7 +56,7 @@ namespace rePok {
         $twig->addGlobal('message_count', $messages);
         $twig->addGlobal('log', $log);
         $twig->addGlobal('glob_lpp', $lpp);
-        $twig->addGlobal('footerlinks', $footerlinks);
+        $twig->addGlobal('searchQuery', $searchQuery);
         $twig->addGlobal('domain', $domain);
         $twig->addGlobal('uri', $uri);
         $twig->addGlobal('pagename', substr($_SERVER['PHP_SELF'], 0, -4));

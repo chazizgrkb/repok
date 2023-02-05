@@ -3,9 +3,13 @@
 namespace rePok {
     require_once dirname(__DIR__) . '/private/class/common.php';
 
-    $query = $_GET['search'] ?? null;
+    $searchQuery = $_GET['search'] ?? null;
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? $_GET['page'] : 1);
     $limit = sprintf("LIMIT %s,%s", (($page - 1) * $lpp), $lpp);
+
+    if ($searchQuery == null) {
+        error(400, "Your search query is empty.");
+    }
 
     $query_start = microtime(true);
 // currently selects all uploaded videos
@@ -22,7 +26,7 @@ SELECT DISTINCT $userfields $videofields FROM videos v
 		t.name LIKE CONCAT('%', ?, '%') 
 	AND 
 		flags != 0x2
-ORDER BY v.id DESC $limit", [$query, $query, $query]);
+ORDER BY v.id DESC $limit", [$searchQuery, $searchQuery, $searchQuery]);
     $videos = $sql->fetchArray($videoData);
 
     foreach ($videos as &$video) {
@@ -40,7 +44,7 @@ SELECT COUNT(DISTINCT v.id) FROM videos v
 	OR
 		t.name LIKE CONCAT('%', ?, '%') 
 	AND 
-		flags != 0x2", [$query, $query, $query]);
+		flags != 0x2", [$searchQuery, $searchQuery, $searchQuery]);
     $query_end = microtime(true);
 
     $duration = substr($query_end - $query_start, 0, 4);
@@ -49,7 +53,7 @@ SELECT COUNT(DISTINCT v.id) FROM videos v
 
     echo $twig->render('results.twig', [
         'videos' => $videos,
-        'query' => $query,
+        'query' => $searchQuery,
         'page' => $page,
         'count' => $count,
         'duration' => $duration,
