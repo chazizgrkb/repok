@@ -76,7 +76,7 @@
                                     <div class="moduleEntryTags">
                                         Tags //
                                         {% if page == "myVideos" %}
-                                            {% for tag in video.tags %}{{ tag.name }}{% endfor %}
+                                            {% for tag in video.tags %}{{ tag.name }} {% endfor %}
                                         {% else %}
                                             {% for tag in video.tags %}
                                                 <a href="results.php?search={{ tag.name }}">{{ tag.name }}</a> :

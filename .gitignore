@@ -32,3 +32,4 @@ private/config/config.php
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/dataSources.xml
