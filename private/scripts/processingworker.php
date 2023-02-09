@@ -18,7 +18,7 @@ namespace rePok {
 
     $config = [
         'timeout' => 3600, // The timeout for the underlying process
-        'ffmpeg.threads' => 12,   // The number of threads that FFmpeg should use
+        'ffmpeg.threads' => 6,   // The number of threads that FFmpeg should use
         'ffmpeg.binaries' => ($ffmpegPath ? $ffmpegPath : 'ffmpeg'),
         'ffprobe.binaries' => ($ffprobePath ? $ffprobePath : 'ffprobe'),
     ];
@@ -28,6 +28,9 @@ namespace rePok {
     $preload_folder = dirname(__DIR__) . "/../dynamic/preload/" . $new;
 
     try {
+		printf("new: %s\n", $new);
+		printf("target_file: %s\n", $target_file);
+		
         $ffmpeg = FFMpeg::create($config);
         $ffprobe = FFProbe::create($config);
         $h264 = new X264();
