@@ -22,6 +22,8 @@ namespace rePok {
         $target_file = dirname(__DIR__) . "/dynamic/preload/" . $new . "/" . $new . "." . $vextension;
         $preload_folder = dirname(__DIR__) . "/dynamic/preload/" . $new;
         $upload_file = "/dynamic/videos/" . $new . ".mp4";
+		
+		die(sprintf('php %s "%s" "%s" > %s 2>&1 &', dirname(__DIR__) . '/private/scripts/processingworker.php', $new, $target_file, dirname(__DIR__) . '/dynamic/videos/' . $new . '.log'));
 
         $title = ($_POST['title'] ?? '');
         $description = ($_POST['desc'] ?? '');
