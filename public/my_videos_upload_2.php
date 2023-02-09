@@ -66,10 +66,9 @@ namespace rePok {
             if (str_starts_with(php_uname(), "Windows")) {
                 pclose(popen(sprintf('start /B php %s "%s" "%s" > %s', dirname(__DIR__) . '\private\scripts\processingworker.php', $new, $target_file, dirname(__DIR__) . '/dynamic/videos/' . $new . '.log'), "r"));
             } else {
-                system(sprintf('php %s "%s" "%s" > %s 2>&1', dirname(__DIR__) . '/private/scripts/processingworker.php', $new, $target_file, dirname(__DIR__) . '/dynamic/videos/' . $new . '.log'), $linuxShit);
+                system(sprintf('php %s "%s" "%s" > %s 2>&1 &', dirname(__DIR__) . '/private/scripts/processingworker.php', $new, $target_file, dirname(__DIR__) . '/dynamic/videos/' . $new . '.log'));
             }
 
-			die($linuxShit);
             redirect('/my_videos_upload_2.php?v=' . $new);
         }
     }
