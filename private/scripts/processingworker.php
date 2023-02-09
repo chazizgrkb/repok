@@ -26,11 +26,11 @@ namespace rePok {
     $new = $argv[1];
     $target_file = $argv[2];
     $preload_folder = dirname(__DIR__) . "/../dynamic/preload/" . $new;
+	
+	printf("new: %s\n", $new);
+	printf("target_file: %s\n", $target_file);
 
     try {
-		printf("new: %s\n", $new);
-		printf("target_file: %s\n", $target_file);
-		
         $ffmpeg = FFMpeg::create($config);
         $ffprobe = FFProbe::create($config);
         $h264 = new X264();
