@@ -25,7 +25,7 @@ namespace rePok {
 
     $new = $argv[1];
     $target_file = $argv[2];
-    $preload_folder = dirname(__DIR__) . "/dynamic/preload/" . $new;
+    $preload_folder = dirname(__DIR__) . "/../dynamic/preload/" . $new;
 
     try {
         $ffmpeg = FFMpeg::create($config);
@@ -87,7 +87,7 @@ namespace rePok {
         unlink($target_file);
         delete_directory($preload_folder);
 
-    } catch (Exception $e) {
+    } catch (\Throwable $e) {
         echo "rePok uploader processor FAIL:" . $e->getMessage();
     }
 
