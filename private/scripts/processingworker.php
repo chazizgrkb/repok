@@ -11,7 +11,7 @@ namespace rePok {
     use FFMpeg\FFProbe;
     use FFMpeg\Filters;
     use FFMpeg\Format\Video\FLV;
-    use FFMpeg\Format\Video\x264;
+    use FFMpeg\Format\Video\X264;
 
     require_once dirname(__DIR__) . '/class/common.php';
     require_once dirname(__DIR__) . '/external/FLV.php';
