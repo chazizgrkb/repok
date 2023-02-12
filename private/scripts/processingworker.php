@@ -60,21 +60,16 @@ namespace rePok {
 
 
         //this doesn't scale too well with short videos.
-        $seccount = round($duration / 4);
-        $seccount2 = $seccount * 1.5;
-        $seccount3 = $seccount2 + $seccount - 1;
+        $seccount1 = round($duration / 4);
+        $seccount2 = $seccount1 * 1.5;
+        $seccount3 = $seccount2 + $seccount1 - 1;
 
-        $frame = $video->frame(Coordinate\TimeCode::fromSeconds($seccount / $framerate));
-        $frame->filters()->custom('scale=120x90');
-        $frame->save(dirname(__DIR__) . '/../dynamic/thumbs/' . $new . '.1.jpg');
-
-        $frame = $video->frame(Coordinate\TimeCode::fromSeconds($seccount2 / $framerate));
-        $frame->filters()->custom('scale=120x90');
-        $frame->save(dirname(__DIR__) . '/../dynamic/thumbs/' . $new . '.2.jpg');
-
-        $frame = $video->frame(Coordinate\TimeCode::fromSeconds($seccount3 / $framerate));
-        $frame->filters()->custom('scale=120x90');
-        $frame->save(dirname(__DIR__) . '/../dynamic/thumbs/' . $new . '.3.jpg');
+        for ($i = 1; $i <= 3; $i++) {
+            $seconds = ${'seccount' . $i};
+            $frame = $video->frame(Coordinate\TimeCode::fromSeconds($seconds / $framerate));
+            $frame->filters()->custom('scale=120x90');
+            $frame->save(dirname(__DIR__) . '/../dynamic/thumbs/' . $new . '.' . $i . '.jpg');
+        }
 
         $video->filters()->resize(new Coordinate\Dimension(320, 240), Filters\Video\ResizeFilter::RESIZEMODE_INSET, true)
             ->custom('format=yuv420p');

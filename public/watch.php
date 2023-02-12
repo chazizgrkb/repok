@@ -18,15 +18,7 @@ namespace rePok {
         $sql->query("INSERT INTO views (video_id, user) VALUES (?,?)", [$videoData['video_id'], $ip]);
     }
 
-    if ($log) {
-        if ($sql->result("SELECT * from favorites WHERE video_id = ? AND user_id = ?", [$videoData['video_id'], $userdata['id']])) {
-            $isFavorited = true;
-        } else {
-            $isFavorited = false;
-        }
-    } else {
-        $isFavorited = false;
-    }
+    $isFavorited = $log ? $sql->result("SELECT * from favorites WHERE video_id = ? AND user_id = ?", [$videoData['video_id'], $userdata['id']]) : false;
 
     if (isset($_COOKIE['useFlashPlayer'])) {
         $isFlash = $_COOKIE['useFlashPlayer'];

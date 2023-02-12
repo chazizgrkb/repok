@@ -15,25 +15,33 @@ namespace rePok {
         }
     }
 
-    // this is dogshit. -grkb 2/3/2023
+    function formatSize($size) {
+        return floor($size / (1024 * 1024)) . " MB";
+    }
+
     $serverStats = array(
         'freeSpace' => array(
             'title' => "Free space",
-            'info' => floor( disk_free_space( "/" ) / ( 1024 * 1024 ) ) . "MB / " .
-                floor( disk_total_space( "/" ) / (1024 * 1024 ) ) . " MB"),
+            'info' => formatSize(disk_free_space("/")) . " / " . formatSize(disk_total_space("/"))
+        ),
         'phpVersion' => array(
             'title' => "PHP version",
-            'info' => phpversion()),
+            'info' => phpversion()
+        ),
         'maxPost' => array(
             'title' => "Max POST size",
-            'info' => ini_get('post_max_size')),
+            'info' => ini_get('post_max_size')
+        ),
         'maxUpload' => array(
             'title' => "Max upload size",
-            'info' => ini_get('upload_max_filesize')),
+            'info' => ini_get('upload_max_filesize')
+        ),
         'servIp' => array(
             'title' => "Server IP",
-            'info' => $_SERVER['SERVER_ADDR']),
+            'info' => $_SERVER['SERVER_ADDR']
+        ),
     );
+
 
     $latestRegisteredUsers = $sql->query("SELECT id, name, joined FROM users ORDER BY joined DESC LIMIT 15");
     $latestSeenUsers = $sql->query("SELECT id, name, lastview FROM users ORDER BY lastview DESC LIMIT 15");
