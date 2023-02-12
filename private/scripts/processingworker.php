@@ -11,14 +11,14 @@ namespace rePok {
     use FFMpeg\FFProbe;
     use FFMpeg\Filters;
     use FFMpeg\Format\Video\FLV;
-    use FFMpeg\Format\Video\x264;
+    use FFMpeg\Format\Video\X264;
 
     require_once dirname(__DIR__) . '/class/common.php';
     require_once dirname(__DIR__) . '/external/FLV.php';
 
     $config = [
         'timeout' => 3600, // The timeout for the underlying process
-        'ffmpeg.threads' => 12,   // The number of threads that FFmpeg should use
+        'ffmpeg.threads' => 6,   // The number of threads that FFmpeg should use
         'ffmpeg.binaries' => ($ffmpegPath ? $ffmpegPath : 'ffmpeg'),
         'ffprobe.binaries' => ($ffprobePath ? $ffprobePath : 'ffprobe'),
     ];
@@ -26,6 +26,9 @@ namespace rePok {
     $new = $argv[1];
     $target_file = $argv[2];
     $preload_folder = dirname(__DIR__) . "/../dynamic/preload/" . $new;
+	
+	printf("new: %s\n", $new);
+	printf("target_file: %s\n", $target_file);
 
     try {
         $ffmpeg = FFMpeg::create($config);
@@ -87,7 +90,7 @@ namespace rePok {
         unlink($target_file);
         delete_directory($preload_folder);
 
-    } catch (Exception $e) {
+    } catch (\Throwable $e) {
         echo "rePok uploader processor FAIL:" . $e->getMessage();
     }
 
