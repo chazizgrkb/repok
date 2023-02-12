@@ -211,10 +211,18 @@ namespace rePok {
         static function getVideoData($userfields, $id)
         {
             global $sql;
-            $videoData = $sql->fetch("SELECT $userfields v.* FROM videos v JOIN users u ON v.author = u.id WHERE v.video_id = ?", [$id]);
-            if (!$videoData) error('404', "The video you were looking for cannot be found.");
-            $videoData["views"] = $sql->fetch("SELECT COUNT(video_id) FROM views WHERE video_id=?", [$videoData['video_id']]) ['COUNT(video_id)'];
-            $videoData["comments"] = $sql->fetch("SELECT COUNT(id) FROM comments WHERE id=?", [$videoData['video_id']]) ['COUNT(id)'];
+            $videoData = $sql->fetch("
+        SELECT $userfields v.*,
+            (SELECT COUNT(video_id) FROM views WHERE video_id = v.video_id) AS views,
+            (SELECT COUNT(id) FROM comments WHERE video_id = v.video_id) AS comments
+        FROM videos v
+        JOIN users u ON v.author = u.id
+        WHERE v.video_id = ?", [$id]);
+
+            if (!$videoData) {
+                error('404', "The video you were looking for cannot be found.");
+            }
+
             return $videoData;
         }
 

@@ -20,8 +20,8 @@ namespace rePok {
         require_once($file);
     }
 
-    // Initialize MySQL class
-    $sql = new MySQL($mysql_auth["host"], $mysql_auth["username"], $mysql_auth["password"], $mysql_auth["db"]);
+    // Initialize Database class
+    $sql = new Database($mysql_auth["host"], $mysql_auth["username"], $mysql_auth["password"], $mysql_auth["db"]);
 
     $userfields = Users::userfields();
     $videofields = Videos::videofields();

@@ -5,7 +5,7 @@ namespace rePok {
     use PDO;
     use PDOException;
 
-    class MySQL
+    class Database
     {
         private $sql;
 
